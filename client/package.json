@@ -2,6 +2,14 @@
   "name": "spotify-fb-google-email-auth-app",
   "version": "0.1.0",
   "private": true,
+  "proxy": {
+    "/auth/google": {
+      "target": "http://localhost:5000"
+    },
+    "/api/*": {
+      "target": "http://localhost:5000"
+    }
+  },
   "dependencies": {
     "history": "^4.7.2",
     "react": "^16.4.1",

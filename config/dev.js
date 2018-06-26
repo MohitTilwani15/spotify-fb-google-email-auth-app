@@ -4,4 +4,5 @@ module.exports = {
   googleClientSecret: 'fsEhUWRRB72ZXOlpuUWQ1AMw',
   spotifyClientID: "50de3492f317438f99f6448c02f63c19",
   spotifyClientSecret: "d06963c79f8a442a89a04e159ea6a22c",
+  cookieKey: "ghdvjhbkjcnskfyteuwi456789jn"
 };
