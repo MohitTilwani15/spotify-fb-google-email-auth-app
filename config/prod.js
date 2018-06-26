@@ -1,3 +1,7 @@
 module.exports = {
-  mongoURI: "mongodb://test:test123@ds147459.mlab.com:47459/authentication"
+  mongoURI: process.env.MONGO_URI,
+  googleClientID: process.env.GOOGLE_CLIENT_ID,
+  googleClientSecret: process.env.GOOGLE_CLIENT_SECRET,
+  spotifyClientID: process.env.SPOTIFY_CLIENT_ID,
+  spotifyClientSecret: process.env.SPOTIFY_CLIENT_SECRET,
 };
