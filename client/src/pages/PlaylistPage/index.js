@@ -12,7 +12,7 @@ export default [{
   render: ([Layout, PlaylistPage], data) => ({
     title: 'Mplatform | Playlist',
     component: (
-			<Layout hideSidebar data={data}>
+			<Layout data={data}>
 				<PlaylistPage />
 			</Layout>
 		),

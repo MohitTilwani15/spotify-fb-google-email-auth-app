@@ -7,13 +7,15 @@ import LoginPage from '../pages/LoginPage';
 import HomePage from '../pages/HomePage';
 import SpotifyPage from '../pages/SpotifyPage';
 import ItunesPage from '../pages/ItunesPage';
+import PlaylistPage from '../pages/PlaylistPage';
 
 const routes = [
   ...SignupPage,
   ...LoginPage,
   ...HomePage,
   ...SpotifyPage,
-  ...ItunesPage
+  ...ItunesPage,
+  ...PlaylistPage
 ];
 
 function resolveRoute(ctx) {

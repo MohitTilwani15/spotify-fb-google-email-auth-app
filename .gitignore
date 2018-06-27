@@ -3,3 +3,5 @@
 
 # secret keys
 config/dev.js
+
+__generated__
