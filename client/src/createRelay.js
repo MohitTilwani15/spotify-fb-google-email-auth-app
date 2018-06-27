@@ -16,6 +16,7 @@ export default function createRelay() {
       headers: {
         'content-type': 'application/json',
       },
+      credentials: 'same-origin',
       body: JSON.stringify({
         query: operation.text,
         variables,

@@ -1,7 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import createHistory from 'history/createBrowserHistory';
 
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
+import App from './App';
+import createRelay from './createRelay';
+
+ReactDOM.render(
+  <App
+    history={createHistory()}
+    createRelay={createRelay}
+  />,
+  document.getElementById('root')
+);

@@ -1,15 +1,18 @@
 // Require external dependencies
 const express = require('express');
+const expressGraphQL = require('express-graphql');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
 
+const schema = require('./schema/schema');
 const keys = require('./config/keys');
 
 require('./models/user');
-require('./services/passport-google');
-require('./services/passport-spotify');
+// require('./services/passport-google');
+// require('./services/passport-spotify');
+require('./services/passport-local');
 
 // connect to MongoDB database
 mongoose.connect(keys.mongoURI);
@@ -42,6 +45,11 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
 }
+
+app.use('/graphql', expressGraphQL({
+  schema,
+  graphiql: true
+}));
 
 // listen to incoming request on a port
 const PORT = process.env.PORT || 5000;

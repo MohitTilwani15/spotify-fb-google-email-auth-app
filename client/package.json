@@ -8,9 +8,14 @@
     },
     "/api/*": {
       "target": "http://localhost:5000"
+    },
+    "/graphql": {
+      "target": "http://localhost:5000"
     }
   },
   "dependencies": {
+    "axios": "^0.18.0",
+    "graphql": "^0.13.2",
     "history": "^4.7.2",
     "react": "^16.4.1",
     "react-app-rewired": "^1.5.2",
@@ -21,10 +26,11 @@
     "universal-router": "^6.0.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "client": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test --env=jsdom",
+    "eject": "react-app-rewired eject",
+    "relay": "relay-compiler --src ./src/ --schema ../schema/schema.graphql --watch"
   },
   "devDependencies": {
     "babel-plugin-relay": "^1.6.0",
