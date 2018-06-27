@@ -1,47 +1,22 @@
-const passport = require('passport');
+const qs = require('qs');
+const keys = require('../config/keys');
+const redirect_uri = 'http://localhost:3000/spotify';
+const stateKey = 'spotify_auth_state';
 
 module.exports = app => {
+  app.get('/spotify_login', function(req, res) {
 
-  // auth routes for google login starts
-  app.get(
-    '/auth/google',
-    passport.authenticate('google', {
-      scope: ['profile', 'email']
-    })
-  );
-
-  app.get(
-    '/auth/google/callback',
-    passport.authenticate('google'),
-    (req, res) => {
-      res.redirect('/');
-    }
-  );
-  // auth routes for google login ends
-
-  // auth routes for spotify login starts
-  app.get(
-    '/auth/spotify',
-    passport.authenticate('spotify', {
-      scope: ['user-read-email']
-    })
-  );
-
-  app.get(
-    '/auth/spotify/callback',
-    passport.authenticate('spotify'),
-    (req, res) => {
-      res.redirect('/');
-    }
-  );
-  // auth routes for spotify login ends
-
-  app.get('/api/current_user', (req, res) => {
-    res.send(req.user);
-  });
-
-  app.get('/api/logout', (req, res) => {
-    req.logout();
-    res.redirect('/');
+    var state = 'vdhjvhvdcwdhj';
+    res.cookie(stateKey, state);
+  
+    // your application requests authorization
+    res.redirect('https://accounts.spotify.com/authorize?' +
+      qs.stringify({
+        response_type: 'code',
+        client_id: keys.spotifyClientID,
+        scope: 'user-read-private,user-read-email',
+        redirect_uri: redirect_uri,
+        state: state
+      }));
   });
 };
