@@ -13,11 +13,19 @@ class Sidebar extends Component {
           </div>
         </li>
         <li><a><i className="material-icons">cloud</i>First Link With Icon</a></li>
-        <li><a>Playlists</a></li>
-        <li><div className="divider"></div></li>
+        <li>
+          <Link href="/playlist">Playlists</Link>
+        </li>
+        <li>
+          <div className="divider"></div>
+        </li>
         <li><a className="subheader">Music Apps</a></li>
-        <li><Link href="/itunes" className="waves-effect">Itunes</Link></li>
-        <li><Link href="/spotify" className="waves-effect">Spotify</Link></li>
+        <li>
+          <Link href="/itunes" className="waves-effect">Itunes</Link>
+        </li>
+        <li>
+          <Link href="/spotify" className="waves-effect">Spotify</Link>
+        </li>
       </ul>
     );
   }
