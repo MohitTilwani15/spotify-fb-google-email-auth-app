@@ -7,7 +7,11 @@ class Sidebar extends Component {
       <ul className="side-nav fixed">
         <li>
           <div className="userView">
-            <img className="background" alt="music" src="https://goo.gl/images/kvyVrP" />
+            <img
+              className="background"
+              style={{ width: '300px', height: '225px' }}
+              alt="music" src={process.env.PUBLIC_URL + '/music.jpg'}
+            />
             <a href="#!name"><span className="white-text name">John Doe</span></a>
             <a href="#!email"><span className="white-text email">jdandturk@gmail.com</span></a>
           </div>
