@@ -10,9 +10,7 @@ const schema = require('./schema/schema');
 const keys = require('./config/keys');
 
 require('./models/user');
-// require('./services/passport-google');
-// require('./services/passport-spotify');
-require('./services/passport-local');
+require('./services/authentication/passport-local');
 
 // connect to MongoDB database
 mongoose.connect(keys.mongoURI);
