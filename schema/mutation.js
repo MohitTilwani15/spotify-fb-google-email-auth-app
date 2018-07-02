@@ -4,7 +4,7 @@ const {
   GraphQLString
 } = graphql;
 const UserType = require('./types/user_type');
-const AuthService = require('../services/passport-local');
+const AuthService = require('../services/authentication/passport-local');
 
 const mutation = new GraphQLObjectType({
   name: 'Mutation',

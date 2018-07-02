@@ -1,14 +1,33 @@
 const graphql = require('graphql');
 const {
   GraphQLObjectType,
-  GraphQLString
+  GraphQLString,
+  GraphQLList,
 } = graphql;
 
-const Spotify = new GraphQLObjectType({
-  name: 'Spotify',
-  fields: {
+const SpotifyUser = new GraphQLObjectType({
+  name: 'SpotifyUser',
+  fields: () => ({
     display_name: { type: GraphQLString }
-  }
+  })
 });
 
-module.exports = Spotify;
+const SpotifySinglePlaylist = new GraphQLObjectType({
+  name: 'SpotifySinglePlaylist',
+  fields: () => ({
+    name: { type: GraphQLString },
+  })
+});
+
+const SpotifyPlaylist = new GraphQLObjectType({
+  name: 'SpotifyPlaylist',
+  fields: () => ({
+    href: { type: GraphQLString },
+    items: { type: new GraphQLList(SpotifySinglePlaylist) },
+  })
+});
+
+module.exports = {
+  SpotifyUser,
+  SpotifyPlaylist,
+};
