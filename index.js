@@ -8,6 +8,7 @@ const passport = require('passport');
 
 const schema = require('./schema/schema');
 const keys = require('./config/keys');
+const loaders = require('./loaders');
 
 require('./models/user');
 require('./services/authentication/passport-local');
@@ -44,9 +45,22 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-app.use('/graphql', expressGraphQL({
-  schema,
-  graphiql: true
+app.use('/graphql', expressGraphQL(request => {
+  const startTime = Date.now();
+  return {
+    schema,
+    context: { loaders: loaders(), req: request },
+    graphiql: true,
+    formatError: error => ({
+      message: error.message,
+      locations: error.locations,
+      stack: error.stack ? error.stack.split('\n') : [],
+      path: error.path
+    }),
+    extensions({ document, variables, operationName, result }) {
+      return { runTime: Date.now() - startTime };
+    }
+  };
 }));
 
 // listen to incoming request on a port
