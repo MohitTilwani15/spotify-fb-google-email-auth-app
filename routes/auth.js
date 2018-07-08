@@ -1,6 +1,7 @@
 const request = require('request');
 const qs = require('qs');
 const keys = require('../config/keys');
+const requireLogin = require('../middlewares/requireLogin');
 const redirect_uri = 'http://localhost:3000/api/spotify/callback';
 const stateKey = 'spotify_auth_state';
 const accessTokenKey = 'spotify-access-token';
@@ -8,7 +9,7 @@ const refreshTokenKey = 'spotify-refresh-token';
 
 module.exports = app => {
 
-  app.get('/api/spotify/login', function(req, res) {
+  app.get('/api/spotify/login', requireLogin, function(req, res) {
 
     var state = 'vdhjvhvdcwdhj';
     res.cookie(stateKey, state);
@@ -24,7 +25,7 @@ module.exports = app => {
       }));
   });
 
-  app.get('/api/spotify/callback', function(req, res) {
+  app.get('/api/spotify/callback', requireLogin, function(req, res) {
     // FE requests refresh and access tokens after checking the state parameter
   
     var code = req.query.code || null;
@@ -68,7 +69,7 @@ module.exports = app => {
     }
   });
 
-  app.get('/refresh_token', function(req, res) {
+  app.get('/refresh_token', requireLogin, function(req, res) {
     // requesting access token from refresh token
     var refresh_token = req.query.refresh_token;
     var authOptions = {
