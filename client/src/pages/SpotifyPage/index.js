@@ -13,7 +13,7 @@ export default[{
   render: ([Layout, SpotifyPage], data) => ({
     title: 'Mplatform | Spotify',
     component: (
-			<Layout data={data}>
+			<Layout requireAuth data={data}>
 				<SpotifyPage data={data} />
 			</Layout>
 		),

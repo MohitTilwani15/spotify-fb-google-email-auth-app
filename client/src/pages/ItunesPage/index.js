@@ -12,7 +12,7 @@ export default[{
   render: ([Layout, ItunesPage], data) => ({
     title: 'Mplatform | Itunes',
     component: (
-			<Layout data={data}>
+			<Layout requireAuth data={data}>
 				<ItunesPage />
 			</Layout>
 		),

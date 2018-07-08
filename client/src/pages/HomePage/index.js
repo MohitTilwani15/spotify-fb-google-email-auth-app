@@ -12,7 +12,7 @@ export default [{
   render: ([Layout, HomePage], data) => ({
     title: 'Mplatform | Home',
     component: (
-			<Layout data={data}>
+			<Layout requireAuth data={data}>
 				<HomePage />
 			</Layout>
 		),
