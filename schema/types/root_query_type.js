@@ -1,19 +1,20 @@
 const graphql = require('graphql');
 const { GraphQLObjectType, GraphQLBoolean } = graphql;
 const UserType = require('./user_type');
-const { SpotifyUser, SpotifyPlaylist } = require('./spotify_type');
+const { SpotifyUser, SpotifyPlaylist, spotifyFullPlaylistDetails } = require('./spotify_type');
 const { extractTokenFromRequestCookie } = require('../../services/helper');
+const { getTrackUrlFromPlaylist } = require('../../loaders/playlistTracksLoader');
 
 const RootQueryType = new GraphQLObjectType({
   name: 'RootQueryType',
   fields: {
     user: {
       type: UserType,
-      resolve(parentvalue, args, req) {
-        return req.user;
+      resolve(parentvalue, args, context) {
+        return context.req.user;
       },
     },
-    spotify_user_details: {
+    spotifyUserDetails: {
       type: SpotifyUser,
       async resolve(parentvalue, args, context) {
         const accessToken = extractTokenFromRequestCookie(context.req.headers.cookie);
@@ -23,14 +24,20 @@ const RootQueryType = new GraphQLObjectType({
         return user;
       },
     },
-    spotify_user_playlist: {
-      type: SpotifyPlaylist,
+    spotifyUserPlaylist: {
+      type: spotifyFullPlaylistDetails,
       async resolve(parentvalue, args, context) {
         const accessToken = extractTokenFromRequestCookie(context.req.headers.cookie);
-        const { Playlist } = context.loaders;
+        const { Playlist, PlaylistTracks } = context.loaders;
         const playlist = await Playlist.load(accessToken);
 
-        return playlist;
+        const urls = getTrackUrlFromPlaylist(playlist);
+        const tracks = await PlaylistTracks.load({ accessToken, urls });
+
+        return {
+          playlist,
+          tracks,
+        };
       },
     },
   },

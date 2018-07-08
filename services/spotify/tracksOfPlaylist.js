@@ -1,9 +1,9 @@
 const request = require('request');
 
-function getTracksFromUserPlaylist(accessToken, userId, playlistId) {
+function getTracksFromUserPlaylist(accessToken, url) {
   return new Promise((resolve, reject) => {
     var options = {
-      url: 'https://api.spotify.com/v1/users/'+ userId + '/playlists/' + playlistId + '/tracks',
+      url,
       headers: { 'Authorization': 'Bearer ' + accessToken },
       json: true
     };

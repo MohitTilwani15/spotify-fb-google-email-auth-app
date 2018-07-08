@@ -89,19 +89,5 @@ module.exports = app => {
       }
     });
   });
-
-  app.get('/api/spotify/me', function(req, res) {
-    var options = {
-      url: 'https://api.spotify.com/v1/me',
-      headers: { 'Authorization': 'Bearer BQCDO8_lzjsBGYxiFpdauZa2gnMigI5xdcONdDwG7OfZbRCkpp6R6LSEUkI0om8mAQcIWGDLyj8y-1Bg4JqecAU6cmmpuCy3DhURs_Yd6mJJ11YMazneMN3zp2o3FD3JJdkoa23dkMuxZPY6O7m7IdNk38b4bPSug9egEjbIDCSGkKfmNQ' },
-      json: true
-    };
-
-    // use the access token to access the Spotify Web API
-    request.get(options, function(error, response, body) {
-      res.send(body);
-    });
-
-  });
   
 };

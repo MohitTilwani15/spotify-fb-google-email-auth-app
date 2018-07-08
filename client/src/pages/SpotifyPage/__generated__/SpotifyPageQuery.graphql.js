@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 52674c6df475acdc2d3713fe44ccfdc8
+ * @relayHash ea42bbffdc3cea194df81595d74333d2
  */
 
 /* eslint-disable */
@@ -10,9 +10,10 @@
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
 type Layout$ref = any;
+type SpotifyPage$ref = any;
 export type SpotifyPageQueryVariables = {||};
 export type SpotifyPageQueryResponse = {|
-  +$fragmentRefs: Layout$ref
+  +$fragmentRefs: Layout$ref & SpotifyPage$ref
 |};
 */
 
@@ -20,12 +21,19 @@ export type SpotifyPageQueryResponse = {|
 /*
 query SpotifyPageQuery {
   ...Layout
+  ...SpotifyPage
 }
 
 fragment Layout on RootQueryType {
   user {
     id
     email
+  }
+}
+
+fragment SpotifyPage on RootQueryType {
+  spotifyUserDetails {
+    display_name
   }
 }
 */
@@ -35,7 +43,7 @@ const node/*: ConcreteRequest*/ = {
   "operationKind": "query",
   "name": "SpotifyPageQuery",
   "id": null,
-  "text": "query SpotifyPageQuery {\n  ...Layout\n}\n\nfragment Layout on RootQueryType {\n  user {\n    id\n    email\n  }\n}\n",
+  "text": "query SpotifyPageQuery {\n  ...Layout\n  ...SpotifyPage\n}\n\nfragment Layout on RootQueryType {\n  user {\n    id\n    email\n  }\n}\n\nfragment SpotifyPage on RootQueryType {\n  spotifyUserDetails {\n    display_name\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -47,6 +55,11 @@ const node/*: ConcreteRequest*/ = {
       {
         "kind": "FragmentSpread",
         "name": "Layout",
+        "args": null
+      },
+      {
+        "kind": "FragmentSpread",
+        "name": "SpotifyPage",
         "args": null
       }
     ]
@@ -80,10 +93,28 @@ const node/*: ConcreteRequest*/ = {
             "storageKey": null
           }
         ]
+      },
+      {
+        "kind": "LinkedField",
+        "alias": null,
+        "name": "spotifyUserDetails",
+        "storageKey": null,
+        "args": null,
+        "concreteType": "SpotifyUser",
+        "plural": false,
+        "selections": [
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "display_name",
+            "args": null,
+            "storageKey": null
+          }
+        ]
       }
     ]
   }
 };
 // prettier-ignore
-(node/*: any*/).hash = 'd3400436ad350886c05f55d7c4119ea7';
+(node/*: any*/).hash = '9923e7603d5e15f760168c0b8c99c977';
 module.exports = node;

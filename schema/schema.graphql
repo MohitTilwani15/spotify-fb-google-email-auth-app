@@ -11,6 +11,31 @@ type Mutation {
 
 type RootQueryType {
   user: UserType
+  spotifyUserDetails: SpotifyUser
+  spotifyUserPlaylist: spotifyFullPlaylistDetails
+}
+
+type spotifyFullPlaylistDetails {
+  playlist: SpotifyPlaylist
+  tracks: SpotifyPlaylisTracks
+}
+
+type SpotifyPlaylist {
+  href: String
+  items: [SpotifySinglePlaylist]
+}
+
+type SpotifyPlaylisTracks {
+  href: String
+}
+
+type SpotifySinglePlaylist {
+  name: String
+  href: String
+}
+
+type SpotifyUser {
+  display_name: String
 }
 
 type UserType {

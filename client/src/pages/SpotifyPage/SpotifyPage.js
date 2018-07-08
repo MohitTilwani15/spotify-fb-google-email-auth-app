@@ -1,26 +1,33 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { graphql, createFragmentContainer } from 'react-relay';
 
 class SpotifyPage extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { data: {} };
-  }
-
-  componentDidMount() {
-    axios.get('/api/spotify/me', { withCredentials: true })
-      .then((data) => {
-        this.setState({ data: data.data });
-      });
-  }
-
   render() {
+    const { data } = this.props;
+
+    if (data && data.spotifyUserDetails && data.spotifyUserDetails.display_name) {
+      return (
+        <h1>Wassup</h1>
+      )
+    }
+
     return (
       <div>
-        <button>Login with spotify</button>
+        <a href="/api/spotify/login">
+          <button>Login with spotify</button>
+        </a>
       </div>
     );
   }
 }
 
-export default SpotifyPage;
+export default createFragmentContainer(
+  SpotifyPage,
+  graphql`
+    fragment SpotifyPage on RootQueryType {
+      spotifyUserDetails {
+        display_name
+      }
+    }
+  `,
+);

@@ -7,13 +7,14 @@ export default[{
   query: graphql`
 		query SpotifyPageQuery {
 			...Layout
+      ...SpotifyPage
 		}
 	`,
   render: ([Layout, SpotifyPage], data) => ({
     title: 'Mplatform | Spotify',
     component: (
 			<Layout data={data}>
-				<SpotifyPage />
+				<SpotifyPage data={data} />
 			</Layout>
 		),
     chunks: ['Spotify'], 
